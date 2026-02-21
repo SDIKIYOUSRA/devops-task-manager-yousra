@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 app.use(express.json());
 
+const tasksRouter = require('./routes/tasks'); 
+
 let tasks = [
   { id: 1, title: "Initial task", completed: true },
   { id: 2, title: "Install Git and Node.js", "completed": true },
@@ -22,5 +24,7 @@ app.post('/tasks', (req, res) => {
   tasks.push(newTask);
   res.status(201).json(newTask);
 });
+
+app.use('/tasks', tasksRouter);
 
 app.listen(3000, ()=> console.log("API running on port 3000"));
